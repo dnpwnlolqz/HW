@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "6f4b7b22-efa8-47f6-8c62-b1e5188509aa",
+		"name": "Postman_HW_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20458809"
+	},
+	"item": [
+		{
+			"name": "first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"This is the first responce from server!ss\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/first",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//3. Спарсить response body в json.\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData)\r",
+							"//7. Спарсить request.\r",
+							"let reqData = request.data;\r",
+							"//console.log(reqData)\r",
+							"\r",
+							"\r",
+							"\r",
+							"//4. Проверить, что name в ответе равно name s request (name вбить руками.)\r",
+							"pm.test(\"Name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql('Test');\r",
+							"});\r",
+							"\r",
+							"//5. Проверить, что age в ответе равно age s request (age вбить руками.)\r",
+							"pm.test(\"Age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql+(20);\r",
+							"});\r",
+							"\r",
+							"//6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)\r",
+							"pm.test(\"Age\", function () {\r",
+							"    pm.expect(jsonData.salary).to.eql(999);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//8. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Request Name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(reqData.name);\r",
+							"});\r",
+							"\r",
+							"//9. Проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"pm.test(\"Request Age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql(reqData.age);\r",
+							"});\r",
+							"\r",
+							"//10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"pm.test(\"Request Salary\", function () {\r",
+							"    pm.expect(jsonData.salary).to.eql+(reqData.salary);\r",
+							"});\r",
+							"\r",
+							"//11. Вывести в консоль параметр family из response.\r",
+							"console.log(jsonData.family)\r",
+							"\r",
+							"//12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)\r",
+							"pm.test(\"u_salary_1_5_year\", function () {\r",
+							"    pm.expect(jsonData.family.u_salary_1_5_year).to.eql(reqData.salary*4);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Test",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "999",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//3. Спарсить response body в json.\r",
+							"let jsonData = pm.response.json();\r",
+							"// console.log(jsonData)\r",
+							"\r",
+							"//4. Спарсить request.\r",
+							"let reqData = pm.request.url.query.toObject();\r",
+							"// console.log(reqData)\r",
+							"\r",
+							"\r",
+							"//5. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Request name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(reqData.name);\r",
+							"});\r",
+							"\r",
+							"//6. Проверить, что age в ответе равно age s request (age забрать из request.)\r",
+							"pm.test(\"Request age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql(reqData.age);\r",
+							"});\r",
+							"\r",
+							"//7. Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"pm.test(\"Request salary\", function () {\r",
+							"    pm.expect(jsonData.salary).to.eql+(reqData.salary);\r",
+							"});\r",
+							"\r",
+							"//8. Вывести в консоль параметр family из response.\r",
+							"console.log(jsonData.family)\r",
+							"\r",
+							"//9. Проверить, что у параметра dog есть параметры name.\r",
+							"pm.test(\"Dog.name\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog).to.have.property('name');\r",
+							"});\r",
+							"\r",
+							"//10. Проверить, что у параметра dog есть параметры age.\r",
+							"pm.test(\"Dog.age\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog).to.have.property('age');\r",
+							"});\r",
+							"\r",
+							"//11. Проверить, что параметр name имеет значение Luky.\r",
+							"pm.test(\"Name Luky\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog.name).to.eql('Luky');\r",
+							"});\r",
+							"\r",
+							"//12. Проверить, что параметр age имеет значение 4.\r",
+							"pm.test(\"Age=4\", function () {\r",
+							"    pm.expect(jsonData.family.pets.dog.age).to.eql(4);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Test&age=20&salary=999",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Test"
+						},
+						{
+							"key": "age",
+							"value": "20"
+						},
+						{
+							"key": "salary",
+							"value": "999"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//3. Спарсить response body в json.\r",
+							"let jsonData = pm.response.json();\r",
+							"// console.log(jsonData)\r",
+							"\r",
+							"//4. Спарсить request.\r",
+							"let reqData = pm.request.url.query.toObject();\r",
+							"// console.log(reqData)\r",
+							"\r",
+							"//5. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
+							"pm.test(\"Request name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(reqData.name);\r",
+							"});\r",
+							"\r",
+							"//6. Проверить, что age в ответе равно age из request (age забрать из request.)\r",
+							"pm.test(\"Request age\", function () {\r",
+							"    pm.expect(jsonData.age).to.eql+(reqData.age);\r",
+							"});\r",
+							"\r",
+							"//7. Вывести в консоль параметр salary из request.\r",
+							"console.log(reqData.salary)\r",
+							"\r",
+							"//8. Вывести в консоль параметр salary из response.\r",
+							"console.log(jsonData.salary)\r",
+							"\r",
+							"//9. Вывести в консоль 0-й элемент параметра salary из response.\r",
+							"console.log(jsonData.salary[0])\r",
+							"\r",
+							"//10. Вывести в консоль 1-й элемент параметра salary параметр salary из response.\r",
+							"console.log(jsonData.salary[1])\r",
+							"\r",
+							"//11. Вывести в консоль 2-й элемент параметра salary параметр salary из response.\r",
+							"console.log(jsonData.salary[2])\r",
+							"\r",
+							"\r",
+							"//12. Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)\r",
+							"pm.test(\"Response salary[0] = Request salary\", function () {\r",
+							"    pm.expect(String(jsonData.salary[0])).to.eql(reqData.salary);\r",
+							"});\r",
+							"\r",
+							"//13. Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)\r",
+							"pm.test(\"Response salary[1] = Request salary*2\", function () {\r",
+							"    pm.expect(Number(jsonData.salary[1])).to.eql(reqData.salary*2);\r",
+							"});\r",
+							"\r",
+							"//14. Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)\r",
+							"pm.test(\"Response salary[2] = Request salary*3\", function () {\r",
+							"    pm.expect(Number(jsonData.salary[2])).to.eql(reqData.salary*3);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
+							"for (let i = 0; i < jsonData.salary.length; i++) {\r",
+							"    console.log(jsonData.salary[i]);\r",
+							"};\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name={{name}}&age={{age}}&salary={{salary}}",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{name}}"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
